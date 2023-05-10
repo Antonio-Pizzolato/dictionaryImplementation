@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import collections
 import numpy as np
 import array as arr
+import Dict
 
 
 class Cell(object):
@@ -35,7 +36,7 @@ class HashTable(object):
         i = 0
         while True:
             k = int(linearHash(v, i))
-            if self.table[k] == "empty" or self.table[k] == "deleted" or ("key", None):
+            if self.table[k] == "empty" or self.table[k] == "deleted" or self.table[k] == ("key", None):
                 self.table[k].key = k
                 self.table[k].value = v
                 return k
@@ -67,4 +68,4 @@ elements = arr.array('i', elements)
 for element in elements:
     A.insert(element)
 
-print(A.table)
+print(A.table[1])
