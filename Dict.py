@@ -1,30 +1,40 @@
 class Dictionary:
-    def __init__(self):
-        self.keys = []
-        self.values = []
+    def __init__(self, size):
+        self.items = [] * size
 
-    def __setitem__(self, key, value):
-        index = self.keys.index(
-            key) if key in self.keys else None  # il metodo index() restituisce l'indice corrispondente alla posizione dell'elemento key (se io inserisco d[1] = value lui cercherà alla posizione 1 dell'array, se 1 è presente nell'array allora assegna il valore 1 a index, altrimenti assegna None)
-        if index is not None:
-            self.values[index] = value
-        else:
-            self.keys.append(key)
-            self.values.append(value)
+    # aggiunge o aggiorna una coppia chiave-valore nella lista (mette value in key)
+    def put(self, key, value):
+        for item in self.items:
+            if item[0] == key:
+                item[1] = value
+                return
+        self.items.append([key, value])
 
-    def __getitem__(self, key):
-        index = self.keys.index(key)
-        return self.values[index]
+    # restituisce il valore associato a una data chiave, sollevando un'eccezione KeyError se la chiave non esiste
+    def get(self, key):
+        for item in self.items:
+            if item[0] == key:
+                return item[1]
+        raise KeyError(f"Key '{key}' not found")
 
-    def __delitem__(self, key):
-        index = self.keys.index(key)
-        del self.keys[index]
-        del self.values[index]
+    # rimuove la coppia chiave-valore associata a una data chiave, sollevando un'eccezione KeyError se la chiave non
+    # esiste
+    def remove(self, key):
+        for i in range(len(self.items)):
+            if self.items[i][0] == key:
+                self.items.pop(i)
+                return
+        raise KeyError(f"Key '{key}' not found")
+
+    # restituiscono rispettivamente una lista delle chiavi, una lista dei valori e una lista di tuple chiave-valore
+    def keys(self):
+        return [item[0] for item in self.items]
+
+    def values(self):
+        return [item[1] for item in self.items]
+
+    def items(self):
+        return self.items.copy()
 
     def __str__(self):
-        pairs = [f"{key}: {value}" for key, value in zip(self.keys, self.values)]
-        return "{" + ", ".join(pairs) + "}"
-
-
-d = Dictionary()
-print(d)
+        return "[" + ", ".join([f"{{{k}: {v}}}" for k, v in self.items]) + "]"
