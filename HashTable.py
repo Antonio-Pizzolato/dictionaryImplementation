@@ -1,4 +1,5 @@
 import Dict
+import time
 
 
 class HashTable:
@@ -8,40 +9,47 @@ class HashTable:
         for i in range(size):
             self.table.put(i, None)
 
-    def hash_function(self, value):
-        return value - (value // self.size) * self.size
+    def hash_function(self, value, i):
+        x = value - (value // self.size) * self.size
+        return (x + i) - ((x + i) // self.size) * self.size
 
-    def insert(self, value):
-        key = self.hash_function(value)
-        if self.table.get(key) is None or self.table.get(key) == "Deleted":
-            self.table.put(key, value)
-        else:
-            i = (key + 1) - ((key + 1) // self.size) * self.size
-            while i != key:
-                if self.table.get(i) is None or self.table.get(key) == "Deleted":
-                    self.table.put(i, value)
-                    return
-                i = (i + 1) - ((i + 1) // self.size) * self.size
-            print("Errore: Overflow della tabella hash")
+    def insert(self, value): # teoricamente l'enorme aumento del tempo di inserimento negli ultimi elementi è dovuto al clustering
+        i = 0
+        while i < self.size:
+            key = self.hash_function(value, i)
+            if self.table.get(key) is None or self.table.get(key) == "Deleted":
+                self.table.put(key, value)
+                return
+            else:
+                i = i + 1
+        print("Errore: Overflow della tabella hash")
+        return
 
     def search(self, value):
-        key = self.hash_function(value)
-        if self.table.get(key) == value:
-            return key
-        elif self.table.get(key) is None:
-            return print("Errore: Valore non trovato")
-        else:
-            i = (key + 1) - ((key + 1) // self.size) * self.size
-            while i != key or self.table.get(key) is None:
-                if self.table.get(i) == value:
-                    return i
-                i = (i + 1) - ((i + 1) // self.size) * self.size
-            return print("Errore: Valore non trovato")
+        i = 0
+        start_s = time.perf_counter()
+        time_array_search = [0.0] * self.size
+        n_s = 0
+        while i < self.size:
+            key = self.hash_function(value, i)
+            if self.table.get(key) == value:
+                end_s = time.perf_counter()
+                time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
+                return key, time_array_search
+            i = i + 1
+            if self.table.get(key) is None or self.table.get(key) == "Deleted" or i >= self.size:
+                end_s = time.perf_counter()
+                time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
+                print("Errore: Valore non trovato")
+                return None, time_array_search
+            end_s = time.perf_counter()
+            time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
+            n_s = n_s + 1
 
     def delete(self, value):
         key = self.search(value)
-        if key is None:
-            return  # print("Errore: Valore non trovato")
+        if key[0] is None:  # key non ritorna None perchè ho aggiunto un valore da ritornare a search
+            return print("Errore: Valore non trovato")
         else:
-            self.table.put(key, "Deleted")
-            return print(self.table.get(key))
+            self.table.put(key[0], "Deleted")
+            return print(self.table.get(key[0]))
