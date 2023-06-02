@@ -1,3 +1,6 @@
+import time
+
+
 class Node:
     def __init__(self, value):
         self.previous = None
@@ -12,8 +15,9 @@ class LinkedList:
     def __init__(self):
         self.head = None
         self.tail = None
+        self.length = 0
 
-    def insert(self, value):
+    def insert(self, value):  # tempo O(1)
         new_node = Node(value)
 
         if self.head is None:
@@ -23,31 +27,79 @@ class LinkedList:
             new_node.previous = self.tail
             self.tail.next = new_node
             self.tail = new_node
+        self.length += 1
+
+    def ordered_insert(self, value):
+        new_node = Node(value)
+
+        # Se la lista è vuota
+        if self.head is None:
+            self.head =  new_node
+            self.tail =  new_node
+            self.length += 1
+            return
+
+        # Caso in cui il nuovo nodo deve essere inserito all'inizio della lista
+        if value < self.head.value:
+            new_node.next = self.head
+            self.head.previous = new_node
+            self.head = new_node
+            self.length += 1
+            return
+
+        current = self.head
+        while current.next is not None and value > current.next.value:
+            current = current.next
+
+        # Caso in cui il nuovo nodo deve essere inserito nel mezzo della lista
+        new_node.next = current.next
+        if current.next is not None:
+            current.next.previous = new_node
+        current.next = new_node
+        new_node.previous = current
+
+        # Caso in cui il nuovo nodo deve essere inserito alla fine della lista
+        if current == self.tail:
+            self.tail = new_node
+
+        self.length += 1
 
     def search(self, value):
         current_node = self.head
+        start_s = time.perf_counter()
+        time_array_search = [0.0] * self.length
+        n_s = 0
         while current_node is not None:
             if current_node.value == value:
-                return current_node
+                end_s = time.perf_counter()
+                time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
+                return current_node, time_array_search
             current_node = current_node.next
-        return None
+            end_s = time.perf_counter()
+            time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
+            n_s = n_s + 1
+        print("Errore: Valore non trovato")
+        return None, time_array_search
 
     def delete(self, value):
         node_to_delete = self.search(value)
-        if node_to_delete:
-            if node_to_delete.previous:
-                node_to_delete.previous.next = node_to_delete.next
+        print(node_to_delete[0])
+        node = node_to_delete[0]
+        if node_to_delete is Node:
+            if node.previous:
+                node.previous.next = node.next
             else:
-                self.head = node_to_delete.next
+                self.head = node.next
                 if self.head:
                     self.head.previous = None
-            if node_to_delete.next:
-                node_to_delete.next.previous = node_to_delete.previous
+            if node.next:
+                node.next.previous = node.previous
             else:
-                self.tail = node_to_delete.previous
+                self.tail = node.previous
                 if self.tail:
                     self.tail.next = None
-            del node_to_delete
+            del node
+            self.length -= 1
             return True
         return False
 
