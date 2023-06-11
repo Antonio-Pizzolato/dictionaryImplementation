@@ -34,8 +34,8 @@ class LinkedList:
 
         # Se la lista è vuota
         if self.head is None:
-            self.head =  new_node
-            self.tail =  new_node
+            self.head = new_node
+            self.tail = new_node
             self.length += 1
             return
 

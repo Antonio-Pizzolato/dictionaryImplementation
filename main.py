@@ -54,9 +54,9 @@ if __name__ == "__main__":
     plt.ylabel('Tempo di esecuzione (millisecondi)')
     plt.title('Tempi di esecuzione tabella hash')
     plt.legend()
-    plt.savefig(
-        "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici esercizio "
-        "1/THIS")
+    # plt.savefig(
+    #     "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici Esercizio "
+    #     "1/THIS")
     plt.show()  # sarebbe meglio separare i due grafici di insert e search quando la ricerca va a buon fine
 
     # Lista Collegata #
@@ -111,9 +111,9 @@ if __name__ == "__main__":
     plt.ylabel('Tempo di esecuzione (millisecondi)')
     plt.title('Tempi di esecuzione lista concatenata')
     plt.legend()
-    plt.savefig(
-        "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici esercizio "
-        "1/LCIS")
+    # plt.savefig(
+    #     "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici Esercizio "
+    #     "1/LCIS")
     plt.show()  # sarebbe meglio separare i due grafici di insert e search quando la ricerca va a buon fine
 
     # ABR #
@@ -161,9 +161,9 @@ if __name__ == "__main__":
     plt.ylabel('Tempo di esecuzione (millisecondi)')
     plt.title('Tempi di esecuzione ABR')
     plt.legend()
-    plt.savefig(
-        "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici esercizio "
-        "1/ABRIS")
+    # plt.savefig(
+    #     "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici Esercizio "
+    #     "1/ABRIS")
     plt.show()  # sarebbe meglio separare i due grafici di insert e search quando la ricerca va a buon fine
 
     # Confronto dei metodi insert #
@@ -174,9 +174,9 @@ if __name__ == "__main__":
     plt.ylabel('Tempo di esecuzione (millisecondi)')
     plt.title('Confronto tempi di esecuzione di insert')
     plt.legend()
-    plt.savefig(
-        "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici esercizio "
-        "1/ConfrIns")
+    # plt.savefig(
+    #     "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici Esercizio "
+    #     "1/ConfrIns")
     plt.show()
 
     # Confronto dei metodi search #
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     plt.ylabel('Tempo di esecuzione (millisecondi)')
     plt.title('Confronto tempi di esecuzione di search')
     plt.legend()
-    plt.savefig(
-        "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici esercizio "
-        "1/ConfrSearch")
+    # plt.savefig(
+    #     "D:/Università/Secondo anno/Algoritmi e Strutture Dati/Elaborato Laboratorio Maggio-Giugno/Grafici Esercizio "
+    #     "1/ConfrSearch")
     plt.show()
