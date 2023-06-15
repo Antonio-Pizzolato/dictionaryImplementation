@@ -68,8 +68,8 @@ class BinarySearchTree:
         return None, time_array_search
 
     def minimum(self, node):
-        while node.right is not None:
-            node = node.right
+        while node.left is not None:
+            node = node.left
         return node
 
     def successor(self, node):

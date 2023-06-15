@@ -63,7 +63,7 @@ class HashTable:
         i = 0
         while i < self.size:
             key = self.hash_function(value, i)
-            if self.table[key].value is None:
+            if self.table[key].value is None or self.table[key].value == "Deleted":
                 self.table[key].value = value
                 self.count += 1
                 return
@@ -84,7 +84,7 @@ class HashTable:
                 time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
                 return key, time_array_search
             i = i + 1
-            if self.table[key].value is None or self.table[key] == "Deleted" or i >= self.size:
+            if self.table[key].value is None or self.table[key].value == "Deleted" or i >= self.size:
                 end_s = time.perf_counter()
                 time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
                 print("Errore: Valore non trovato")

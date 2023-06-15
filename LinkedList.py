@@ -83,9 +83,8 @@ class LinkedList:
 
     def delete(self, value):
         node_to_delete = self.search(value)
-        print(node_to_delete[0])
         node = node_to_delete[0]
-        if node_to_delete is Node:
+        if node is Node:
             if node.previous:
                 node.previous.next = node.next
             else:
