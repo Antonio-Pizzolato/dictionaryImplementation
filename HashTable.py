@@ -15,8 +15,8 @@ class HashTable:
     def __init__(self, size):
         self.size = size
         self.table = [Node(i, None) for i in range(size)]
-        self.function = int(input('Choose what function to use (insert the number): \n1. linear hash \n2. quadratic '
-                                  'hash \n3. double hash\n'))
+        self.function = int(input('Scegli quale funzione utilizzare (inserisci il numero): \n1. linear hash \n2. '
+                                  'quadratic hash \n3. double hash\n'))
         if self.function == 1:
             self.hash_function = self.linear_hash_function
         elif self.function == 2:
@@ -66,11 +66,10 @@ class HashTable:
             if self.table[key].value is None or self.table[key].value == "Deleted":
                 self.table[key].value = value
                 self.count += 1
-                return
+                break
             else:
-                i = i + 1
-        print("Errore: Overflow della tabella hash")
-        return
+                i += 1
+        # print("Errore: Overflow della tabella hash")
 
     def search(self, value):
         i = 0
@@ -87,7 +86,7 @@ class HashTable:
             if self.table[key].value is None or self.table[key].value == "Deleted" or i >= self.size:
                 end_s = time.perf_counter()
                 time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
-                print("Errore: Valore non trovato")
+                # print("Errore: Valore non trovato")
                 return None, time_array_search
             end_s = time.perf_counter()
             time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
@@ -96,11 +95,11 @@ class HashTable:
     def delete(self, value):
         key = self.search(value)
         if key[0] is None:
-            return print("Errore: Valore non trovato")
+            return
         else:
             self.table[key[0]].value = "Deleted"
             self.count -= 1
-            return print(self.table[key[0]])
+            return  # print(self.table[key[0]])
 
     def __str__(self):
         items = [f"{node}" for node in self.table]

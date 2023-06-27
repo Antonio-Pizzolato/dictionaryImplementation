@@ -78,7 +78,7 @@ class LinkedList:
             end_s = time.perf_counter()
             time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
             n_s = n_s + 1
-        print("Errore: Valore non trovato")
+        # print("Errore: Valore non trovato")
         return None, time_array_search
 
     def delete(self, value):

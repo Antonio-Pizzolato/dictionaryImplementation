@@ -55,7 +55,7 @@ class BinarySearchTree:
             if value == current_node.value:
                 end_s = time.perf_counter()
                 time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
-                print("Key:", current_node.key, "Value:", current_node.value)
+                # print("Key:", current_node.key, "Value:", current_node.value)
                 return current_node, time_array_search
             elif value < current_node.value:
                 current_node = current_node.left
@@ -64,7 +64,7 @@ class BinarySearchTree:
             end_s = time.perf_counter()
             time_array_search[n_s] = round(time_array_search[n_s - 1] + ((end_s - start_s) * 1000), 4)
             n_s = n_s + 1
-        print("Errore: Valore non trovato")
+        # print("Errore: Valore non trovato")
         return None, time_array_search
 
     def minimum(self, node):
